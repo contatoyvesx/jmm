@@ -37,11 +37,13 @@ cpSync(resolve(root, "server", "index.mjs"), resolve(outDir, "server", "index.mj
 // Copy client assets into .output/public/
 cpSync(resolve(dist, "client"), resolve(outDir, "public"), { recursive: true });
 
-// Write minimal package.json so `npm install --omit=dev` inside .output works
+// Write minimal package.json so runtime deps can be installed inside .output
 const rootPkg = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8"));
 const runtimeDeps = {
-  srvx: rootPkg.dependencies.srvx,
+  ...rootPkg.dependencies,
+  "h3-v2": "npm:h3@latest"
 };
+
 writeFileSync(
   resolve(outDir, "package.json"),
   JSON.stringify(
