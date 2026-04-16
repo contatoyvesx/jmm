@@ -35,41 +35,48 @@ function ProdutosPage() {
 
   return (
     <SiteLayout>
-      <section className="bg-primary text-primary-foreground">
-        <div className="container-tight py-16 md:py-20">
-          <p className="heading-eyebrow text-primary-foreground/60 mb-4">Catálogo</p>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight max-w-3xl text-balance">
+      <section className="relative overflow-hidden bg-primary text-primary-foreground">
+        <div className="absolute inset-0 industrial-grid opacity-25" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_25%)]" />
+
+        <div className="container-tight relative py-14 sm:py-16 md:py-20">
+          <p className="heading-eyebrow mb-4 text-primary-foreground/60">Catálogo</p>
+
+          <h1 className="max-w-4xl text-balance text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
             Linha completa de alumínio para cozinhas exigentes.
           </h1>
-          <p className="mt-6 max-w-2xl text-primary-foreground/70 leading-relaxed">
+
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-primary-foreground/72 sm:text-base">
             Da panela doméstica ao utensílio profissional, fabricamos cada item com o mesmo
             padrão industrial de qualidade.
           </p>
         </div>
       </section>
 
-      <section className="container-tight py-16">
-        <div className="flex flex-wrap gap-2 mb-10 border-b border-border pb-6">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-4 py-2 text-sm font-medium border transition-colors ${
-                active === cat
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-background text-foreground border-border hover:border-primary"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+      <section className="container-tight py-12 sm:py-14 md:py-16">
+        <div className="mb-8 border-b border-border pb-5 sm:mb-10 sm:pb-6">
+          <div className="flex flex-wrap gap-2.5">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`px-4 py-2.5 text-sm font-medium transition-all duration-300 ${
+                  active === cat
+                    ? "border border-primary bg-primary text-primary-foreground shadow-sm"
+                    : "border border-border bg-background text-foreground hover:border-primary/40 hover:bg-secondary"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
             <article
               key={p.id}
-              className="group bg-background border border-border hover:border-primary transition-colors flex flex-col"
+              className="group flex h-full flex-col overflow-hidden border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
             >
               <div className="aspect-square overflow-hidden bg-muted">
                 <img
@@ -78,19 +85,26 @@ function ProdutosPage() {
                   width={800}
                   height={800}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
+
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   {p.category}
                 </p>
-                <h3 className="text-lg font-bold mb-2">{p.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4 flex-1">{p.description}</p>
-                <ul className="space-y-1 text-xs text-foreground/80 border-t border-border pt-4">
+
+                <h3 className="mb-2 text-lg font-bold">{p.name}</h3>
+
+                <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {p.description}
+                </p>
+
+                <ul className="space-y-2 border-t border-border pt-4 text-xs text-foreground/80">
                   {p.specs.map((s) => (
-                    <li key={s} className="flex gap-2">
-                      <span className="text-muted-foreground">—</span> {s}
+                    <li key={s} className="flex gap-2 leading-relaxed">
+                      <span className="text-muted-foreground">—</span>
+                      <span>{s}</span>
                     </li>
                   ))}
                 </ul>
@@ -101,14 +115,20 @@ function ProdutosPage() {
       </section>
 
       <section className="bg-secondary">
-        <div className="container-tight py-16 md:py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-balance max-w-2xl mx-auto">
+        <div className="container-tight py-14 text-center sm:py-16 md:py-20">
+          <h2 className="mx-auto max-w-3xl text-balance text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             Precisa de um produto específico ou volume sob encomenda?
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
             Atendemos pedidos personalizados para revendedores, redes e indústrias.
           </p>
-          <Button asChild size="lg" className="rounded-none mt-8 h-12 px-6">
+
+          <Button
+            asChild
+            size="lg"
+            className="mt-8 h-12 rounded-none px-6 transition-transform duration-300 hover:-translate-y-0.5"
+          >
             <Link to="/contato">
               Solicitar orçamento <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
