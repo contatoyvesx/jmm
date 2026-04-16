@@ -16,15 +16,6 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    id: "panela-pressao",
-    name: "Panela de Pressão Industrial",
-    category: "Panelas",
-    description:
-      "Panela de pressão em alumínio reforçado, alta capacidade, ideal para uso intensivo doméstico e profissional.",
-    image: pressure,
-    specs: ["4,5L · 7L · 10L · 20L", "Alumínio polido 3,5mm", "Válvula de segurança tripla"],
-  },
-  {
     id: "conjunto-panelas",
     name: "Jogo de Panelas Tradicional",
     category: "Panelas",
